@@ -2,11 +2,3 @@
 *.idea*
 *__pycache__*
 *ipynb_checkpoints*
-
-*.npy
-*.pt
-*.out
-
-preprocess/playground.ipynb
-preprocess/SimCSE/train_SimCSE/data
-preprocess/SimCSE/train_SimCSE/ckpts
