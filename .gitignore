@@ -5,8 +5,6 @@
 
 *.npy
 *.pt
-*.pkl
-*.json
 *.out
 
 preprocess/playground.ipynb

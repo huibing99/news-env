@@ -69,8 +69,8 @@ n_gpu	1
 
 EnvEnhancedFramework(
   (fake_news_detector): BiLSTM(
-    (embedding): Embedding(1193515, 200)
-    (lstm): LSTM(200, 64, batch_first=True, bidirectional=True)
+    (embedding): Embedding(2196018, 300)
+    (lstm): LSTM(300, 64, batch_first=True, bidirectional=True)
   )
   (fcs): ModuleList(
     (0): Linear(in_features=128, out_features=64, bias=True)

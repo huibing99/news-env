@@ -13,7 +13,7 @@ from torch_geometric.data import DataLoader
 from torch.utils.data.distributed import DistributedSampler
 from torch.cuda.amp import GradScaler, autocast
 import torch.distributed as dist
-from torch.nn.parallel import DistributedDataParallel as DDP
+# from torch.nn.parallel import DistributedDataParallel as DDP
 from torch.optim import AdamW, lr_scheduler
 
 from config import parser
@@ -40,10 +40,11 @@ if __name__ == "__main__":
     print('save path: ', args.save)
     print('Start time:', time.strftime(
         "%Y-%m-%d %H:%M:%S", time.localtime(time.time())))
-
+    print(torch.cuda.is_available())
     args.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    # args.device = torch.device("cpu")
     args.n_gpu = torch.cuda.device_count()
-
+    print(args.device, args.n_gpu)
     random.seed(args.seed)
     np.random.seed(args.seed)
     torch.manual_seed(args.seed)
@@ -109,14 +110,16 @@ if __name__ == "__main__":
     print(model)
     print('\nLoading model time: {:.2f}s\n-----------------------------------------\n'.format(
         time.time() - start))
-
+    # CPU
+    # criterion = nn.CrossEntropyLoss()
     criterion = nn.CrossEntropyLoss().cuda()
     optimizer = AdamW(filter(lambda p: p.requires_grad,
                              model.parameters()), lr=args.lr)
 
     if args.fp16:
         scaler = GradScaler()
-
+    print(torch.cuda.is_available())
+    # CPU
     model = model.cuda()
 
     if args.resume != '':

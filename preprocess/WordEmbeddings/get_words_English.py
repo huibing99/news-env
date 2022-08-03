@@ -103,8 +103,8 @@ if __name__ == '__main__':
         with open(file, 'r') as f:
             pieces = json.load(f)
 
-        for p in pieces:
-            p['content'] = ''.join(p['content_all'])
+        # for p in pieces:
+        #     p['content'] = ''.join(p['content_all'])
 
         pieces_words = [nltk.word_tokenize(p['content'].lower())
                         for p in tqdm(pieces)]

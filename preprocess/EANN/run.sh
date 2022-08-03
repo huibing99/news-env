@@ -1,6 +1,6 @@
 # ===================== Configuration =====================
 # 'Chinese' or 'English'
-dataset_name='Chinese'
+dataset_name='English'
 events_num=300
 
 # ===================== Event Clustering by Kmeans =====================

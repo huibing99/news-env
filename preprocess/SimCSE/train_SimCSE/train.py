@@ -20,7 +20,8 @@ logger = logging.getLogger('SimCSE')
 logger.setLevel(level=logging.INFO)
 device = torch.device(
     "cuda:0") if torch.cuda.is_available() else torch.device("cpu")
-
+print(torch.device)
+print(torch.cuda.is_available())
 
 class SimCSE(nn.Module):
     def __init__(self, pretrained, pool_type="cls", dropout_prob=0.3):
@@ -72,7 +73,7 @@ def parse_args():
         "--train_file", type=str, help="train text file"
     )
     parser.add_argument(
-        "--PTM_root_path", type=str, default="./PretrainedLM", help="the root path of PTMs"
+        "--PTM_root_path", type=str, default="/home/huibing/pretrained_model", help="the root path of PTMs"
     )
     parser.add_argument(
         "--pretrained", type=str, help="huggingface pretrained model"
@@ -84,7 +85,7 @@ def parse_args():
         "--max_length", type=int, default=256, help="sentence max length"
     )
     parser.add_argument(
-        "--batch_size", type=int, default=32, help="batch size"
+        "--batch_size", type=int, default=16, help="batch size"
     )
     parser.add_argument(
         "--epochs", type=int, default=2, help="epochs"
@@ -178,6 +179,7 @@ def train(args, model_out):
                          attention_mask=data["attention_mask"].to(device),
                          token_type_ids=data["token_type_ids"].to(device))
             loss = compute_loss(pred, args.tau)
+            # print("---------loss: ", loss)
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()

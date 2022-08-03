@@ -76,7 +76,8 @@ if __name__ == "__main__":
 
     date2idx = {}
     for i in range(len(news)):
-        date = news[i]['time'].split(' ')[0]
+        # date = news[i]['time'].split(' ')[0]
+        date = news[i]['date']
         if date in date2idx:
             date2idx[date].append(i)
         else:
